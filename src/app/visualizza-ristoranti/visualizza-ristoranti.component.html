@@ -1,0 +1,26 @@
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th></th>
+      <th scope="col">Nome Ristorante</th>
+      <th scope="col">Descrizione</th>
+      <th scope="col">Cap-Ubicazione</th>
+      <th scope="col">Piatti Serviti</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let rist of ristoranti">
+      <td><input type="checkbox" class="ristorante" id="{{rist.ristorante.id}}" name="Seleziona" /></td>
+      <td>{{rist.ristorante.nome}}</td>
+      <td>{{rist.ristorante.descrizione}}</td>
+      <td>{{rist.ristorante.ubicazione}}</td>
+      <td>
+        <ol>
+          <li *ngFor="let piatto of rist.piatti">
+            {{piatto.nome}}
+          </li>
+        </ol>
+      </td>
+    </tr>
+  </tbody>
+</table>
