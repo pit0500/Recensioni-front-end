@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { RistorantePiatto } from '../Recensione';
+import { Piatto, Ristorante, RistorantePiatto } from '../Recensione';
 import { ServerserviceService } from '../serverservice.service';
 
 @Component({
@@ -11,12 +11,19 @@ import { ServerserviceService } from '../serverservice.service';
 export class VisualizzaRistorantiComponent implements OnInit {
 
   ristoranti: RistorantePiatto[] = [];
+  piatti: Piatto[] = [];
+  ristDaAggiungere: Ristorante[] = [];
+  ristDaRimuovere: Number[] = [];
 
   constructor(private ajax: ServerserviceService) {}
 
   ngOnInit(): void {
-    var obs: Observable<RistorantePiatto[]> = this.ajax.getRistoranti();
-    obs.subscribe(rist => this.ristoranti = rist);
+    var obsRist: Observable<RistorantePiatto[]> = this.ajax.getRistoranti();
+    obsRist.subscribe(rist => this.ristoranti = rist);
+    var obsPiatti: Observable<Piatto[]> = this.ajax.getPiatti();
+    obsPiatti.subscribe(piatti => this.piatti = piatti);
   }
+
+
 
 }

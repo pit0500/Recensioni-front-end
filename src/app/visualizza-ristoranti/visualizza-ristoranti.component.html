@@ -15,12 +15,40 @@
       <td>{{rist.ristorante.descrizione}}</td>
       <td>{{rist.ristorante.ubicazione}}</td>
       <td>
-        <ol>
+        <ul>
           <li *ngFor="let piatto of rist.piatti">
             {{piatto.nome}}
           </li>
-        </ol>
+        </ul>
       </td>
     </tr>
   </tbody>
 </table>
+
+<input type="button" id="aggiungi" value="Aggiungi Ristorante" class="btn btn-secondary" />
+<input type="button" id="rimuovi" value="Rimuovi Ristorante" class="btn btn-danger"/>
+<input type="button" id="salva" value="Salva" class="btn btn-success"/>
+
+<form action="doAddRestaurant" method="post" class="form">
+  <h2>Aggiungi un nuovo ristorante</h2>
+  <label for="nome" class="form-label">Nome Ristorante*</label>
+  <input class="form-control" type="text" placeholder="Nome ristorante" name="nome" id="nomeRistorante"/>
+
+  <label for="ubicazione" class="form-label">Ubicazione*</label>
+  <input class="form-control" type="text" placeholder="Ubicazione ristorante" name="ubicazione" id="ubicazioneRistorante"/>
+
+  <label for="descrizione" class="form-label">Descrizione*</label>
+  <textarea name="descrizione" id="descrizioneRistorante" cols="30" rows="3" placeholder="Descrizione ristorante..." class="form-control"></textarea>
+
+  <div *ngFor="let piatto of piatti">
+    <label class="form-check-label">
+      <input type="checkbox" name="piatto" id="piatto.id" onchange="selezionaPiatto(piatto.id, piatto.prezzo, event)">
+      <span>{{piatto.nome}}</span>
+      Prezzo: <strong><span>{{piatto.prezzo}}</span></strong>
+    </label>
+  </div>
+
+  <input type="submit" class="btn btn-success" value="Invia direttamente al server"/>
+
+</form>
+
