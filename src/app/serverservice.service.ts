@@ -12,8 +12,8 @@ export class ServerserviceService {
 
   private url: string = "http://localhost:8080";
 
-  getRecensioni(): Observable<Recensione[]> {
-    var recensioni: Observable<Recensione[]> = this.http.get<Recensione[]>(this.url + "/dammiRecensioni");
+  getRecensioni(jsessionId: string): Observable<Recensione[]> {
+    var recensioni: Observable<Recensione[]> = this.http.post<Recensione[]>(this.url + "/dammiRecensioni?jsessionid="+jsessionId, {});
     return recensioni;
   }
 
@@ -28,9 +28,9 @@ export class ServerserviceService {
   }
 
   checkLogin(jsessionid: string): Observable<Boolean> {
-    let queryParams = new HttpParams();
-    queryParams.append("jsessionid", jsessionid);
-    return this.http.post<Boolean>(this.url + "/checkAuth", {"jsessionid": jsessionid});
+    // let queryParams = new HttpParams();
+    // queryParams.append("jsessionid", jsessionid);
+    return this.http.get<Boolean>(this.url + "/checkAuth", {params: {jsessionid: jsessionid}});
   }
 
 }

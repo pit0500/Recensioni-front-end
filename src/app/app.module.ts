@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { VisualizzaRecensioniComponent } from './visualizza-recensioni/visualizza-recensioni.component';
 import { VisualizzaRistorantiComponent } from './visualizza-ristoranti/visualizza-ristoranti.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { VisualizzaRistorantiComponent } from './visualizza-ristoranti/visualizz
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

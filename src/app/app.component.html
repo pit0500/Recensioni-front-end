@@ -1,4 +1,4 @@
-<div class="container-fluid" *ngIf="isLogged === true">
+<div class="container-fluid" *ngIf="isLogged">
   <h2>{{title}}</h2>
   <div role="group" aria-label="Basic radio toggle button group">
 
@@ -7,11 +7,11 @@
               for="btnradio2">Visualizza Ristoranti</label>
 
     <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off">
-    <label class="btn btn-outline-dark" routerLink="visualizzaRecensioni"
+    <label class="btn btn-outline-dark" routerLink="visualizzaRecensioni" [queryParams]="{jsessionid: sessionId}"
               for="btnradio1">Visualizza Recensioni</label>
   </div>
   <router-outlet></router-outlet>
 </div>
-<div *ngIf="isLogged === false">
+<div *ngIf="!isLogged">
   <p>Mi dispiace non sei autorizzato</p>
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Recensione } from '../Recensione';
 import { ServerserviceService } from '../serverservice.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-visualizza-recensioni',
@@ -12,11 +13,20 @@ export class VisualizzaRecensioniComponent implements OnInit {
 
   recensioni: Recensione[] = [];
 
-  constructor(private ajax: ServerserviceService) { }
+  sessionId: string = "";
+
+  constructor(private servizi: ServerserviceService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    var obs: Observable<Recensione[]> = this.ajax.getRecensioni();
-    obs.subscribe(recs => this.recensioni = recs);
+    var sessionId = this.route.queryParams.subscribe(
+      params => {
+        var sessionId = params['jsessionid'];
+        if (sessionId != null) {
+          this.sessionId = sessionId;
+          var obs: Observable<Recensione[]> = this.servizi.getRecensioni(sessionId);
+          obs.subscribe(recs => this.recensioni = recs);
+        }
+      });
   }
 
 }

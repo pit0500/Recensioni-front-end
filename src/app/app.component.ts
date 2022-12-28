@@ -10,6 +10,8 @@ export class AppComponent implements OnInit {
 
   isLogged: Boolean = false;
 
+  sessionId: string = "";
+
   title = 'Amministrazione Recensioni';
 
   constructor(private servizi: ServerserviceService) {}
@@ -18,7 +20,12 @@ export class AppComponent implements OnInit {
     const urlParams = new URLSearchParams(window.location.search);
     var sessionId = urlParams.get("jsessionid");
     if (sessionId) {
-      this.servizi.checkLogin(sessionId).subscribe(ok => this.isLogged = ok);
+      this.servizi.checkLogin(sessionId).subscribe(ok => {
+        this.isLogged = ok
+        if (ok && sessionId != null) {
+          this.sessionId = sessionId;
+        }
+      });
     }
   }
 
